@@ -1,0 +1,21 @@
+{
+  "name": "simple-express-todo-list",
+  "version": "1.0.0",
+  "main": "src/app.ts",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.2.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  },
+  "scripts": {
+    "dev": "node --loader ts-node/esm src/app.ts",
+    "build": "tsc",
+    "start": "node dist/app.js"
+  },
+  "type": "module"
+}
