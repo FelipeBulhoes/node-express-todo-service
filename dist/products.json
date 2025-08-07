@@ -1,0 +1,62 @@
+[
+    {
+        "code": "758264",
+        "name": "Chocolate Bar",
+        "price": 72.24,
+        "photoUrl": "https://dummyimage.com/150x150/cccccc/000000&text=Product+1"
+    },
+    {
+        "code": "220271",
+        "name": "Toothpaste",
+        "price": 75.33,
+        "photoUrl": "https://dummyimage.com/150x150/cccccc/000000&text=Product+2"
+    },
+    {
+        "code": "920508",
+        "name": "Soda Can",
+        "price": 68.73,
+        "photoUrl": "https://dummyimage.com/150x150/cccccc/000000&text=Product+3"
+    },
+    {
+        "code": "541429",
+        "name": "Bag of Chips",
+        "price": 67.3,
+        "photoUrl": "https://dummyimage.com/150x150/cccccc/000000&text=Product+4"
+    },
+    {
+        "code": "744628",
+        "name": "Laundry Detergent",
+        "price": 53.94,
+        "photoUrl": "https://dummyimage.com/150x150/cccccc/000000&text=Product+5"
+    },
+    {
+        "code": "494966",
+        "name": "Notebook",
+        "price": 95.47,
+        "photoUrl": "https://dummyimage.com/150x150/cccccc/000000&text=Product+6"
+    },
+    {
+        "code": "810748",
+        "name": "Bottle of Water",
+        "price": 33.76,
+        "photoUrl": "https://dummyimage.com/150x150/cccccc/000000&text=Product+7"
+    },
+    {
+        "code": "543648",
+        "name": "Instant Noodles",
+        "price": 57.31,
+        "photoUrl": "https://dummyimage.com/150x150/cccccc/000000&text=Product+8"
+    },
+    {
+        "code": "242360",
+        "name": "Pack of Batteries",
+        "price": 79.55,
+        "photoUrl": "https://dummyimage.com/150x150/cccccc/000000&text=Product+9"
+    },
+    {
+        "code": "429369",
+        "name": "Shampoo",
+        "price": 10.56,
+        "photoUrl": "https://dummyimage.com/150x150/cccccc/000000&text=Product+10"
+    }
+]

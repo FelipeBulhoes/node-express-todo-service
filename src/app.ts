@@ -1,55 +1,106 @@
 import express from 'express';
+import productsData from './products.json' with { type: 'json' };
+import cors from 'cors';
 
 const app = express();
-app.use(express.json()); // Middleware to parse JSON bodies
+app.use(express.json());
 
-let todos = [
-  { id: 1, task: 'Learn Node.js', completed: false },
-  { id: 2, task: 'Build TODO app', completed: false }
-];
+app.use(cors());
 
-app.get('/todos', (req, res) => {
-  res.json(todos);
+interface Product {
+  code: string;
+  name: string;
+  price: number;
+  photoUrl: string;
+}
+
+function validateCode(input: string): boolean {
+  if (!input || input.trim() === "") return false;
+
+  const regex = /^[1-9][0-9]{5}$/;
+  return regex.test(input);
+}
+
+let products: Product[] = productsData.map(product => ({
+  code: product.code,
+  name: product.name,
+  price: product.price,
+  photoUrl: product.photoUrl,
+}));
+
+app.get('/products', (req, res) => {
+  res.json(products);
 });
 
-app.post('/todos', (req, res) => {
-  const { task } = req.body;
-  if (!task) {
-    return res.status(400).json({ error: 'Task is required' });
-  }
-  const newTodo = {
-    id: todos.length + 1,
-    task,
-    completed: false
-  };
-  todos.push(newTodo);
-  res.status(201).json(newTodo);
-});
-
-app.put('/todos/:id', (req, res) => {
-  const { id } = req.params;
-  const { task, completed } = req.body;
-  const todo = todos.find(t => t.id === parseInt(id));
+// find by code
+app.get('/products/:code', (req, res) => {
+  const { code } = req.params;
+  const product = products.find(t => t.code === code);
   
-  if (!todo) {
+  if (!product) {
+    return res.status(404).json({ error: 'Product not found' });
+  }
+  
+  res.json(product);
+});
+
+app.post('/products', (req, res) => {
+  const isCodeValid = validateCode(req.body.code);
+
+  if (!isCodeValid) {
+    return res.status(400).json({ error: 'Invalid code format' });
+  }
+
+  const { 
+    code,
+    name,
+    price,
+    photoUrl,
+   } = req.body;
+
+  if (!code && name && price && photoUrl) {
+    return res.status(400).json({ error: 'Data missing' });
+  }
+
+  const newProduct = {
+    code,
+    name,
+    price,
+    photoUrl,
+  };
+
+  products.push(newProduct);
+
+  res.status(201).json(newProduct);
+});
+
+app.put('/products/:code', (req, res) => {
+  const { code } = req.params;
+  const { name, price, photoUrl } = req.body;
+
+  const product = products.find(t => t.code === code);
+  
+  if (!product) {
     return res.status(404).json({ error: 'Todo not found' });
   }
+
+  if (name) product.name = name;
+  if (price) product.price = price;
+  if (photoUrl) product.photoUrl = photoUrl;
   
-  if (task) todo.task = task;
-  if (completed !== undefined) todo.completed = completed;
-  
-  res.json(todo);
+  res.json(product);
 });
 
-app.delete('/todos/:id', (req, res) => {
-  const { id } = req.params;
-  const index = todos.findIndex(t => t.id === parseInt(id));
+app.delete('/products/:code', (req, res) => {
+  const { code } = req.params;
+  const index = products.findIndex(t => t.code === code);
   
   if (index === -1) {
-    return res.status(404).json({ error: 'Todo not found' });
+    return res.status(404).json({ error: 'Product not found' });
   }
   
-  todos.splice(index, 1);
+  products.splice(index, 1);
+
   res.status(204).send();
 });
 
